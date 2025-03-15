@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 // Define an interface for the User document
 interface IUser extends Document {
   username: string;
+  userId: string;
   email: string;
   password: string;
   isCorrectPassword(password: string): Promise<boolean>;
