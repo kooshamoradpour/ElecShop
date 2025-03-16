@@ -40,9 +40,19 @@ const resolvers = {
       throw new AuthenticationError('Could not authenticate user.');
     },
     product: async (_parent: any,{ name }: any, _context: any) => {
-      const product = await Product.findOne({ name });
-      return product
-    }
+      try {
+        const product = await Product.findOne({ name });
+        if (!product) {
+          throw new Error("Product not found")          
+        }
+        return product
+
+      } catch (error) {
+        throw new Error("unknown error occured");
+        
+      }
+    },
+    getAllProducts: async () => {return await Product.find()}
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {

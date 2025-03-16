@@ -1,33 +1,30 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const typeDefs = gql`
   type User {
-    _id: ID!
+    # _id: ID!
     username: String!
     email: String!
     password: String!
     cart: Cart
   }
-  type Product{
+  type Product {
     productId: String!
     name: String!
     description: String!
     image: String!
     price: Float!
+    stock: Int!
+  }
+  type CartItem {
+    product: Product!
     quantity: Int!
-    # link: String!
-}
-type CartItem{
-  product: Product!
-  quantity: Int !
-  
-}
-type Cart {
-    _id: ID
-    user: User
+  }
+  type Cart {
+    # _id: ID
+    user: User!
     items: [CartItem]
-    # link: String!
-}
+  }
 
   input UserInput {
     username: String!
@@ -36,14 +33,14 @@ type Cart {
   }
 
   input SaveProduct {
-  productId: String!
-  name: String!
-  description: String!
-  image: String!
-  price: Float!
-  quantity: Int!
-}
-  
+    productId: String!
+    name: String!
+    description: String!
+    image: String!
+    price: Float!
+    stock: Int!
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -53,15 +50,16 @@ type Cart {
     # users: [User]
     # user(username: String!): User
     me: User
-    product: Product
+    product(name:String!): Product!
+    getAllProducts:[Product!]
   }
 
   type Mutation {
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth
-    saveProductToCart(input: saveProduct!):User
-    removeProductFromCart(productId: String!):User
-    addProductToDB(input: saveProduct): Product
+    saveProductToCart(input: SaveProduct!): User
+    removeProductFromCart(productId: String!): User
+    addProductToDB(input: SaveProduct): Product
   }
 `;
 
