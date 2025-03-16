@@ -1,21 +1,17 @@
-import productSchema from "./Product.js"
+// import productSchema from "./Product.js"
+// import userSchema from './User.js'
 import { model, Schema, type Document } from "mongoose"
-import { ProductDocument } from "./Product.js"
+import { IProduct } from "./Product.js"
+import { IUser } from './User.js'
 
 export interface ICart extends Document {
-    userId: string;
-    product: ProductDocument[];
+    user: IUser;
+    product: IProduct[];
 }
 
 const cartSchema = new Schema<ICart>({
-    _id:
-    {
-        type: Schema,
-    },
-    product: [{
-        type: productSchema,
-        required: true,
-    }],
+    user:{type: Schema.Types.ObjectId, ref: 'User'},
+    product: [{type: Schema.Types.ObjectId, ref: 'Product'}],
 })
 const Cart = model<ICart>('Cart', cartSchema);
 export default Cart;
