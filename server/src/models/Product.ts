@@ -1,6 +1,6 @@
 import { model, Schema, type Document } from 'mongoose';
 
-export interface ProductDocument extends Document {
+export interface IProduct extends Document {
     productId: string;
     name: string;
     description: string;
@@ -10,7 +10,7 @@ export interface ProductDocument extends Document {
 }
 
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedBooks` array in User.js
-const productSchema = new Schema<ProductDocument>({
+const productSchema = new Schema<IProduct>({
     productId:
     {
         type: String,
@@ -32,11 +32,11 @@ const productSchema = new Schema<ProductDocument>({
         type: Number,
         required: true,
     },
-    stock: { // should be stock!!
+    stock: { // should be stock!! not quantity 
         type: Number,
         required: true,
     }
 })
-const Product = model<ProductDocument>('Product', productSchema)
+const Product = model<IProduct>('Product', productSchema)
 
 export default Product
