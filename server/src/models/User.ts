@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 
 // Define an interface for the User document
 interface IUser extends Document {
+  id:string;
   username: string;
   email: string;
   password: string;
