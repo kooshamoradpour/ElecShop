@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import Logo from "../assets/Logo.png"
 
 const  NavigationBar = () => {
   return (
     <ul className="nav nav-tabs" style={{display: "flex", listStyle: "none"}}>
+      <img src="Logo" alt="logo" />
       <li className="nav-item" style={{padding: '0 10px'}}>
         <Link to="/">
           <h1 className="m-0">Home</h1>
