@@ -67,28 +67,11 @@ const NavigationBar = () => {
             <FaSearch style={{ color: "black" }} />
           </button>
         </div>
-        
-        <div className="d-flex align-items-center">
-          <Link to="/cart" className="d-lg-none" style={cartIconStyle}>
-            <FaShoppingCart />
-          </Link>
-          <button 
-            className="navbar-toggler" 
-            type="button" 
-            onClick={toggleMenu}
-            style={{ border: "none", marginLeft: "15px" }}
-          >
-            <FaBars style={{ color: "white", fontSize: "24px", outline: "none" }} />
-          </button>
-        </div>
 
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-header" style={navHeaderStyle}>
               <Link to="/products" style={{ color: "white" }}>Products</Link>
-            </li>
-            <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/profile" className="nav-link" style={{ color: "white" }}>My profile</Link>
             </li>
             <li className="nav-header" style={navHeaderStyle}>
               <Link to="/contact" className="nav-link" style={{ color: "white" }}>Contact Us</Link>
@@ -107,16 +90,33 @@ const NavigationBar = () => {
           </ul>
         </div>
 
-  
-        <div style={searchContainerStyle} className="d-lg-none mt-2 w-100">
-          <input
-            type="text"
-            placeholder="Search for a product"
-            style={searchInputStyle}
-          />
-          <button style={searchButtonStyle}>
-            <FaSearch style={{ color: "black" }} />
-          </button>
+        {/* Mobile Search Bar with Icons */}
+        <div className="d-lg-none w-100 mt-2">
+          <div className="d-flex align-items-center justify-content-between">
+            <div style={{ ...searchContainerStyle, margin: "0", flex: "1" }}>
+              <input
+                type="text"
+                placeholder="Search for a product"
+                style={searchInputStyle}
+              />
+              <button style={searchButtonStyle}>
+                <FaSearch style={{ color: "black" }} />
+              </button>
+            </div>
+            <div className="d-flex align-items-center ms-3">
+              <Link to="/cart" style={cartIconStyle}>
+                <FaShoppingCart />
+              </Link>
+              <button 
+                className="navbar-toggler" 
+                type="button" 
+                onClick={toggleMenu}
+                style={{ border: "none", marginLeft: "15px" }}
+              >
+                <FaBars style={{ color: "white", fontSize: "24px", outline: "none" }} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
