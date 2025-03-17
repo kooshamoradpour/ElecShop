@@ -1,0 +1,6 @@
+/* Custom hover effect for the Proceed to Checkout button */
+.custom-btn:hover {
+    background-color: #13AE5C !important;  /* Apply the green color on hover */
+    border-color: #13AE5C !important;      /* Ensure the border color matches the background */
+  }
+  
