@@ -79,10 +79,10 @@ const NavigationBar = () => {
 
             {/* Login and Signup Buttons */}
             <button className="login" onClick={() => setFormType("login")} style={{ margin: "0 10px", padding: "8px 16px", borderRadius: "10px", border: "none", backgroundColor: "#000", color: "#fff" }}>
-              Login
+              Sign in
             </button>
             <button className="signup" onClick={() => setFormType("signup")} style={{ padding: "8px 16px", borderRadius: "10px", border: "none", backgroundColor: "#fff", color: "#000" }}>
-              Signup
+            New customer?
             </button>
 
             <li className="nav-header d-none d-lg-block" style={navHeaderStyle}>
@@ -134,7 +134,7 @@ const NavigationBar = () => {
             </button>
             {formType === "login" ? (
               <form className="form">
-                <h2>Login</h2>
+                <h2>Sign in</h2>
                 <label>
                   Email:
                   <input type="email" />
@@ -143,11 +143,11 @@ const NavigationBar = () => {
                   Password:
                   <input type="password" />
                 </label>
-                <button type="submit">Login</button>
+                <button type="submit">Sign in</button>
               </form>
             ) : (
               <form className="form">
-                <h2>Signup</h2>
+                <h2>Sign up</h2>
                 <label>
                   Name:
                   <input type="text" />
@@ -160,7 +160,7 @@ const NavigationBar = () => {
                   Password:
                   <input type="password" />
                 </label>
-                <button type="submit">Signup</button>
+                <button type="submit">New customer?</button>
               </form>
             )}
           </div>
