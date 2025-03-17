@@ -93,16 +93,35 @@ const NavigationBar = () => {
           </ul>
         </div>
 
-  
-        <div style={searchContainerStyle} className="d-lg-none mt-2 w-100">
-          <input
-            type="text"
-            placeholder="Search for a product"
-            style={searchInputStyle}
-          />
-          <button style={searchButtonStyle}>
-            <FaSearch style={{ color: "black" }} />
-          </button>
+
+        {/* Mobile Search Bar with Icons */}
+        <div className="d-lg-none w-100 mt-2">
+          <div className="d-flex align-items-center justify-content-between">
+            <div style={{ ...searchContainerStyle, margin: "0", flex: "1" }}>
+              <input
+                type="text"
+                placeholder="Search for a product"
+                style={searchInputStyle}
+              />
+              <button style={searchButtonStyle}>
+                <FaSearch style={{ color: "black" }} />
+              </button>
+            </div>
+            <div className="d-flex align-items-center ms-3">
+              <Link to="/cart" style={cartIconStyle}>
+                <FaShoppingCart />
+              </Link>
+              <button 
+                className="navbar-toggler" 
+                type="button" 
+                onClick={toggleMenu}
+                style={{ border: "none", marginLeft: "15px" }}
+              >
+                <FaBars style={{ color: "white", fontSize: "24px", outline: "none" }} />
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
