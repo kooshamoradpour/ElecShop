@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+
 import logo from "../assets/ElecShop Logo.png";
+
 
 // Add CSS styles for nav-header
 const navHeaderStyle = {
@@ -15,6 +17,7 @@ const NavigationBar = () => {
         <Link className="navbar-brand d-flex align-items-center" to="/" style={{ color: "black" }}>
           <img src={logo} alt="ElecShop Logo" style={{ height: "40px", marginRight: "10px" }} />
           <span style={{ fontWeight: "bold", fontSize: "1.5rem" }}>ElecShop</span>
+
         </Link>
         
         <div className="nav-menu">
