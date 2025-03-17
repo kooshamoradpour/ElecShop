@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 import logo from "../assets/ElecShop Logo.png";
-
-
+import SignUpForm from './SignupForm';
+import LoginForm from './LoginForm';
 // Add CSS styles for nav-header
 const navHeaderStyle = {
   margin: "0 10px",
@@ -23,7 +23,7 @@ const NavigationBar = () => {
         <div className="nav-menu">
           <ul className="navbar-nav">
             <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/products" style={{ color: "white" }}>Products</Link>
+              <Link to="/Cart" style={{ color: "white" }}>Products</Link>
             </li>
             <li className="nav-header" style={navHeaderStyle}>
               <Link to="/profile" className="nav-link" style={{ color: "white" }}>My profile</Link>
@@ -31,12 +31,12 @@ const NavigationBar = () => {
             <li className="nav-header" style={navHeaderStyle}>
               <Link to="/contact" className="nav-link" style={{ color: "white" }}>Contact Us</Link>
             </li>
-            <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/login" style={{ color: "white" }}>Sign in</Link>
-            </li>
-            <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/signup" style={{ color: "white" }}>Register</Link>
-            </li>
+            <button className="login" >
+              Login
+            </button>
+            <button className="signup">
+              Signup
+              </button>
           </ul>
         </div>
       </div>
