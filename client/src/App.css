@@ -1709,3 +1709,10 @@ label form [type='radio'] {
     align-content: center;
   }
 }
+
+/* Sidebar media  */
+@media screen and (max-width: 768px) {
+  .Sidebar {
+    display: none;
+  }
+}
