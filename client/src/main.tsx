@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
 import Cart from './pages/Cart';
+import Contact from './pages/Contact.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       }, {
         path: '/cart',
         element: <Cart />
+      },
+      {
+        path: '/contact',
+        element: <Contact />
       }
     ]
   },
