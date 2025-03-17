@@ -1,4 +1,4 @@
-import { User } from '../models/index.js';
+import { Product, User } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js'; 
 
 // Define types for the arguments
@@ -15,19 +15,19 @@ interface LoginUserArgs {
   password: string;
 }
 
-interface UserArgs {
-  username: string;
-}
+// interface UserArgs {
+//   username: string;
+// }
 
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate('thoughts');
-    },
-    user: async (_parent: any, { username }: UserArgs) => {
-      return User.findOne({ username }).populate('thoughts');
-    },
+    // users: async () => {
+      // return User.find().populate('thoughts');
+    // },
+    // user: async (_parent: any, { username }: UserArgs) => {
+    //   return User.findOne({ username }).populate('thoughts');
+    // },
 
     // Query to get the authenticated user's information
     // The 'me' query relies on the context to check if the user is authenticated
@@ -39,6 +39,20 @@ const resolvers = {
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
     },
+    product: async (_parent: any,{ name }: any, _context: any) => {
+      try {
+        const product = await Product.findOne({ name });
+        if (!product) {
+          throw new Error("Product not found")          
+        }
+        return product
+
+      } catch (error) {
+        throw new Error("unknown error occured");
+        
+      }
+    },
+    getAllProducts: async () => {return await Product.find()}
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {

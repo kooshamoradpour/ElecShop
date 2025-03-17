@@ -1,11 +1,14 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { ICart } from './Cart';
 
 // Define an interface for the User document
-interface IUser extends Document {
+export interface IUser extends Document {
+  // id:string;
   username: string;
   email: string;
   password: string;
+  cart: ICart;
   isCorrectPassword(password: string): Promise<boolean>;
 }
 
