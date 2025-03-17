@@ -17,7 +17,7 @@ const typeDefs = gql`
     stock: Int!
   }
   type CartItem {
-    productId: ID! # single product id and its quantity
+    productId: Product! # single product id and its quantity
     quantity: Int!
   }
 
