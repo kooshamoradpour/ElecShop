@@ -43,7 +43,9 @@ const resolvers = {
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id }) .populate('cart.productId')
+        return User.findOne({ _id: context.user._id }).populate(
+          "cart.productId"
+        );
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError("Could not authenticate user.");
@@ -99,24 +101,52 @@ const resolvers = {
       // Return the token and the user
       return { token, user };
     },
-   
+
     saveProductToCart: async (
       _parent: any,
       { input }: AddToCart,
       context: Context // return the info of the logged in user and then we can save the product in cart for that user
     ): Promise<IUser | null> => {
       if (context.user) {
+        
         return await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { cart: { productId: input.productId, quantity: input.quantity } } },
+          {
+            $addToSet: {
+              cart: { ...input },
+            },
+          },
           {
             new: true,
             runValidators: true,
           }
-        ).populate('cart.productId')
+        ).populate("cart.productId");
+      }
+
+      throw AuthenticationError;
+    },
+
+    removeProductFromCart: async (
+      _parent: any,
+      { productId }: { productId: string },
+      context: Context
+    ): Promise<IUser | null> => {
+      if (context.user) {
+        return await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { cart: { productId } } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        ).populate('cart.productId');
       }
       throw AuthenticationError;
     },
+
+    addProduuctToDB: async (_parent:any, _args: any, _context:Context) => {
+      
+    }
   },
 };
 
