@@ -1,6 +1,7 @@
 import { Product, User } from "../models/index.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
-import { IUser } from "../models/User.js";
+import { IUser,ICart } from "../models/User.js";
+
 
 // Define types for the arguments
 interface Context {
@@ -25,9 +26,12 @@ interface LoginUserArgs {
   password: string;
 }
 
-// interface UserArgs {
-//   username: string;
-// }
+interface UpdateCartQuantity {
+  input: {
+  productId: string;
+  quantity: number;
+}
+}
 
 const resolvers = {
   Query: {
@@ -43,7 +47,7 @@ const resolvers = {
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id }) .populate('cart.productId')
+        return User.findOne({ _id: context.user._id }).populate('cart.productId')
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError("Could not authenticate user.");
@@ -74,7 +78,8 @@ const resolvers = {
 
       // Return the token and the user
       return { token, user };
-    },
+
+  },
 
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
       // Find a user with the provided email
@@ -99,7 +104,7 @@ const resolvers = {
       // Return the token and the user
       return { token, user };
     },
-   
+
     saveProductToCart: async (
       _parent: any,
       { input }: AddToCart,
@@ -117,7 +122,36 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-  },
-};
+    updateQuantity: async (_parent: any, { input }: UpdateCartQuantity, context: Context) => {
+      if (!context.user) {
+        throw new AuthenticationError("User not authenticated.");
+      }
+
+      const { productId, quantity } = input;
+
+      const user = await User.findById(context.user._id);
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const updateQuantityIndex = user.cart.findIndex(
+        (item: any) => item.productId.toString() === productId
+      );
+
+      if (updateQuantityIndex === -1) {
+        throw new Error("Product not found in cart");
+      }
+
+      user.cart[updateQuantityIndex].quantity += quantity;
+
+      await user.save();
+
+      // const token = signToken(user.username, user.email, user._id);
+
+      return {cart: user.cart };
+    }
+  }
+  };
+
 
 export default resolvers;
