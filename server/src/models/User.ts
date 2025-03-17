@@ -4,7 +4,7 @@ import { ICart } from './Cart';
 
 // Define an interface for the User document
 export interface IUser extends Document {
-  // id:string;
+  // id:string; ad isAdmin field here and in typedef before starting in frontend land
   username: string;
   email: string;
   password: string;

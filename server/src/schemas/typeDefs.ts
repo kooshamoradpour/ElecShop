@@ -23,7 +23,7 @@ const typeDefs = gql`
   type Cart {
     # _id: ID
     user: User!
-    items: [CartItem]
+    cartItems: [CartItem!] # can i use SaveProduct instead of Product
   }
 
   input UserInput {
@@ -39,6 +39,7 @@ const typeDefs = gql`
     image: String!
     price: Float!
     stock: Int!
+    quantity: Int!
   }
 
   type Auth {
@@ -57,7 +58,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(input: UserInput!): Auth
     login(email: String!, password: String!): Auth
-    saveProductToCart(input: SaveProduct!): User
+    saveProductToCart(input: SaveProduct!): User  # return the user with updated cart also saveProduct can take quantity from the display card client side
     removeProductFromCart(productId: String!): User
     addProductToDB(input: SaveProduct): Product
   }
