@@ -1,8 +1,12 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { ICart } from './Cart';
+import { IProduct } from './Product';
+// import  { ICart } from './Cart';
 
 // Define an interface for the User document
+interface ICart extends Document {
+  product:IProduct[]
+}
 export interface IUser extends Document {
   // id:string; ad isAdmin field here and in typedef before starting in frontend land
   username: string;
@@ -31,7 +35,13 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       minlength: 5,
-    }
+    },
+    cart:[
+      {
+        productId:{type: Schema.Types.ObjectId, ref: 'Product'},
+        quantity:{type: Number, required:true, min:1}
+      }
+    ] 
   },
   {
     timestamps: true,
