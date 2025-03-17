@@ -932,7 +932,7 @@ a:hover {
 }
 
 .bg-light {
-  background-color: #d9e9e8 !important;
+  background-color: #FFFFFF !important ;
 }
 
 .bg-dark {
@@ -1156,7 +1156,10 @@ form .form-input {
 form .form-input.form-input-squared {
   border-radius: 0;
 }
-
+.form-check-input:checked {
+  background-color: #13AE5C !important;
+  border-color: #13AE5C !important;
+}
 form [type='checkbox'],
 form [type='radio'] {
   display: inline-block;
@@ -1704,5 +1707,12 @@ label form [type='radio'] {
   }
   .align-content-center-xl {
     align-content: center;
+  }
+}
+
+/* Sidebar media  */
+@media screen and (max-width: 768px) {
+  .Sidebar {
+    display: none;
   }
 }
