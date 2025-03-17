@@ -16,11 +16,7 @@ interface AddUserArgs {
 interface AddToCart {
   input: {
     productId: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    stock: number;
+    quantity: number;
   };
 }
 
@@ -47,7 +43,7 @@ const resolvers = {
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("thoughts");
+        return User.findOne({ _id: context.user._id }) .populate('cart.productId')
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError("Could not authenticate user.");
@@ -103,6 +99,7 @@ const resolvers = {
       // Return the token and the user
       return { token, user };
     },
+   
     saveProductToCart: async (
       _parent: any,
       { input }: AddToCart,
@@ -111,12 +108,12 @@ const resolvers = {
       if (context.user) {
         return await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { cart: { ...input } } },
+          { $addToSet: { cart: { productId: input.productId, quantity: input.quantity } } },
           {
             new: true,
             runValidators: true,
           }
-        );
+        ).populate('cart.productId')
       }
       throw AuthenticationError;
     },
