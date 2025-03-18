@@ -14,14 +14,14 @@ interface AddUserArgs {
     password: string;
   };
 }
-interface AddProductToDB{
+interface AddProductToDB {
   input: {
     name: string;
     description: string;
     image: string;
     price: number;
     stock: number;
-  }
+  };
 }
 interface AddToCart {
   input: {
@@ -35,9 +35,12 @@ interface LoginUserArgs {
   password: string;
 }
 
-// interface UserArgs {
-//   username: string;
-// }
+interface UpdateCartQuantity {
+  input: {
+    productId: string;
+    quantity: number;
+  };
+}
 
 const resolvers = {
   Query: {
@@ -118,7 +121,6 @@ const resolvers = {
       context: Context // return the info of the logged in user and then we can save the product in cart for that user
     ): Promise<IUser | null> => {
       if (context.user) {
-        
         return await User.findOneAndUpdate(
           { _id: context.user._id },
           {
@@ -136,6 +138,26 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    updateQuantity: async (
+      _parent: any,
+      { input }: UpdateCartQuantity,
+      context: Context
+    ) => {
+      if (!context.user) {
+        throw new AuthenticationError("User not authenticated.");
+      }
+
+      const { productId } = input;
+
+      const user = await User.findOneAndUpdate(
+        { "cart.productId": productId },
+        { $inc: { "cart.$.quantity": 1 } },
+        { new: true }
+      );
+
+      return user;
+    },
+
     removeProductFromCart: async (
       _parent: any,
       { productId }: { productId: string },
@@ -149,15 +171,19 @@ const resolvers = {
             new: true,
             runValidators: true,
           }
-        ).populate('cart.productId');
+        ).populate("cart.productId");
       }
       throw AuthenticationError;
     },
 
-    addProductToDB: async (_parent:any, {input}: AddProductToDB, context:Context): Promise<IProduct|null> => {
-      if(context.user?.isAdmin) return await Product.create({...input})
-        throw AuthenticationError;
-    }
+    addProductToDB: async (
+      _parent: any,
+      { input }: AddProductToDB,
+      context: Context
+    ): Promise<IProduct | null> => {
+      if (context.user?.isAdmin) return await Product.create({ ...input });
+      throw AuthenticationError;
+    },
   },
 };
 

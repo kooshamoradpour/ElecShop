@@ -58,6 +58,7 @@ const typeDefs = gql`
     saveProductToCart(input: SaveProduct!): User # return the user with updated cart also saveProduct can take quantity from the display card client side
     removeProductFromCart(productId: ID!): User
     addProductToDB(input: InsertProductToDB): Product
+    updateQuantity(input: SaveProduct): User
   }
 `;
 
