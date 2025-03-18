@@ -1,5 +1,6 @@
 import { useState, ReactNode } from "react";
 import Sidebar from "../components/Sidebar";
+import '../styles/home.css';
 
 const Home = () => {
   const [sortOption, setSortOption] = useState("new");
@@ -47,11 +48,11 @@ const Home = () => {
         <div className="col-md-9">
           
           <div className="sort-container">
-            <div className="button-group">
-              <button className="custom-button">New</button>
-              <button className="custom-button">Price ascending</button>
-              <button className="custom-button">Price descending</button>
-              <button className="custom-button">Rating</button>
+            <div className="filter-buttons">
+              <button className="filter-button active">New</button>
+              <button className="filter-button">Price ascending</button>
+              <button className="filter-button">Price descending</button>
+              <button className="filter-button">Rating</button>
             </div>
           </div>
 
