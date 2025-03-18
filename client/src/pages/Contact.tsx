@@ -104,76 +104,167 @@ const Contact = () => {
           {/* Error message for validation */}
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
-          <button type="submit" className="btn btn-primary external-button">Submit</button>
+      {/* Submit Button */}
+          <div className="button-container">
+    <button type="submit" className="external-button">Submit</button>
+</div>
         </form>
       </div>
 
       {/* Developers Section */}
       <h1 className="text-center" style={{ paddingBottom: "20px", fontWeight: "bolder" }}>Our Developers</h1>
       <h5 className="text-center" style={{ paddingBottom: "20px" }}>
-        From left to right: <strong>Stanley Bertrand</strong>, <strong>Koosha Moradpour</strong>, <strong>Aley Wigwe</strong>, and <strong>Adarsh Sidhu</strong>.
+        From left to right: <strong>Stanley Bertrand</strong>, <strong>Koosha Moradpour</strong>, <strong>Aley Wigwe</strong>, <strong>Adarsh Sidhu</strong>, and <strong>Philip Ecdao</strong>.
       </h5>
 
-      {/* Developer Cards */}
-      <div className="container my-5">
-        <div className="row justify-content-center">
-          {[
-            {
-              name: "Stanley Bertrand",
-              github: "https://github.com/bertrandstanley",
-              linkedin: "https://www.linkedin.com/in/stanleybertrand/"
-            },
-            {
-              name: "Koosha Moradpour",
-              github: "https://github.com/kooshamoradpour",
-              linkedin: "https://www.linkedin.com/in/koosha-moradpour/"
-            },
-            {
-              name: "Aley Wigwe",
-              github: "https://github.com/aleyw2244",
-              linkedin: "https://www.linkedin.com/in/aley-wigwe-64151614b/"
-            },
-            {
-              name: "Adarsh Sidhu",
-              github: "https://github.com/sidhuad",
-              linkedin: "https://www.linkedin.com/in/adarsh-s-898380161/"
-            },  
-
-            {
-              name: "Philip Ecdel",
-              github: "https://github.com/sidhuad",
-              linkedin: "https://www.linkedin.com/in/philipecdao/"
-            }
+  {/* Developers Section */}
+      <div className="custom-flex col-12 col-md-3">
+          {/* Stanley Bertrand Card */}
+        <div
+          className="card stanley contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+        >
+          <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <ul className="d-flex list-unstyled mt-auto">
+              <li className="me-auto"></li>
+            </ul>
+            <div className="center d-flex justify-content-between mt-3">
               
-            
-          ].map((developer, index) => (
-            <div className="col-12 col-md-3 mb-4" key={index}>
-              <div className="card contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-                <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                  <div className="d-flex justify-content-center mt-3">
-                    {/* GitHub Button */}
-                    <a href={developer.github} target="_blank" rel="noopener noreferrer">
-                      <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0 mx-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
-                          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
-                        </svg>
-                      </button>
-                    </a>
+              {/* Action 1 button - GitHub redirect */}
+              <a href="https://github.com/bertrandstanley" target="_blank" rel="noopener noreferrer">
+                <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                  </svg>
+                </button>
+              </a>
 
-                    {/* LinkedIn Button */}
-                    <a href={developer.linkedin} target="_blank" rel="noopener noreferrer">
-                      <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0 mx-2">
-                        {/* LinkedIn Icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
-                          <path d="M1 0a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H0V1a1 1 0 0 1 1-1h1zM4 4.5A1.5 1.5 0 1 0 4 7a1.5 1.5 0 0 0 0-2.5zM6 0h8a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM7 14h7V8H7v6z"/>
-                        </svg>
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {/* Action 2 button - LinkedIn redirect */}
+              <a href="https://www.linkedin.com/in/stanleybertrand/" target="_blank" rel="noopener noreferrer">
+                <button className="contact-button contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                  </svg>
+                </button>
+              </a>
             </div>
-          ))}
+          </div>
+        </div>
+           {/* Koosha Moradpour Card */}
+        <div
+          className="card koosha contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+        >
+          <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <ul className="d-flex list-unstyled mt-auto">
+              <li className="me-auto"></li>
+            </ul>
+            <div className="center d-flex justify-content-between mt-3">
+              {/* Action 1 button - GitHub redirect */}
+              <a href="https://github.com/kooshamoradpour" target="_blank" rel="noopener noreferrer">
+                <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                  </svg>
+                </button>
+              </a>
+
+              {/* Action 2 button - LinkedIn redirect */}
+              <a href="https://www.linkedin.com/in/koosha-moradpour/" target="_blank" rel="noopener noreferrer">
+                <button className="contact-button contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+  {/* Aley Wigwe Card */}
+        <div
+          className="card aley contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+        >
+          <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <ul className="d-flex list-unstyled mt-auto">
+              <li className="me-auto"></li>
+            </ul>
+            <div className="center d-flex justify-content-between mt-3">
+              {/* Action 1 button - GitHub redirect */}
+              <a href="https://github.com/aleyw2244" target="_blank" rel="noopener noreferrer">
+                <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                  </svg>
+                </button>
+              </a>
+
+              {/* Action 2 button - LinkedIn redirect */}
+              <a href="https://www.linkedin.com/in/aley-wigwe-64151614b/" target="_blank" rel="noopener noreferrer">
+                <button className="contact-button contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+           {/* Adarsh Sidhu Card */}
+        <div
+          className="card adarsh contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+        >
+          <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <ul className="d-flex list-unstyled mt-auto">
+              <li className="me-auto"></li>
+            </ul>
+            <div className="center d-flex justify-content-between mt-3">
+              {/* Action 1 button - GitHub redirect */}
+              <a href="https://github.com/sidhuad" target="_blank" rel="noopener noreferrer">
+                <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                  </svg>
+                </button>
+              </a>
+
+              {/* Action 2 button - LinkedIn redirect */}
+              <a href="https://www.linkedin.com/in/adarsh-s-898380161/" target="_blank" rel="noopener noreferrer">
+                <button className="contact-button contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Philip Ecdao */}
+        <div
+          className="card philip contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+        >
+          <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <ul className="d-flex list-unstyled mt-auto">
+              <li className="me-auto"></li>
+            </ul>
+            <div className="center d-flex justify-content-between mt-3">
+              {/* Action 1 button - GitHub redirect */}
+              <a href="https://github.com/pecdao" target="_blank" rel="noopener noreferrer">
+                <button className="contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+                  </svg>
+                </button>
+              </a>
+
+              {/* Action 2 button - LinkedIn redirect */}
+              <a href="https://www.linkedin.com/in/philipecdao/" target="_blank" rel="noopener noreferrer">
+                <button className="contact-button contact-card-button card-btn btn text-white svg-button btn-sm border-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
+                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </>

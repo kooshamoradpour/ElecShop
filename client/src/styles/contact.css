@@ -1,4 +1,8 @@
 .contact-container {
+    display: flex; /* Ensure it's a flex container */
+    justify-content: flex-start; /* Align to the left */
+    gap: 10px; /* Space between the elements, if needed */
+    align-items: center; /* Align items vertically */
     margin-bottom: 100px;
 }
 
@@ -9,7 +13,7 @@
 }
 
 div.stanley {
-    background-image: url('../../public/Stanley-Bertrand.png');
+    background-image: url('../../Stanley.png');
     background-size: cover;
     background-position: center;
     height: 250px !important;
@@ -17,7 +21,7 @@ div.stanley {
 }
 
 div.koosha {
-    background-image: url('../../public/Gilmer-Perez.png');
+    background-image: url('../../Koosha.png');
     background-size: cover;
     background-position: center;
     height: 250px !important;
@@ -25,7 +29,7 @@ div.koosha {
 }
 
 div.aley {
-    background-image: url('../styles/contact.css/Aley Wigwe');
+    background-image: url('../../Aley.png');
     background-size: cover;
     background-position: center;
     height: 250px !important;
@@ -33,11 +37,25 @@ div.aley {
 }
 
 div.adarsh {
-    background-image: url('https://ca.slack-edge.com/T07U2AESUKX-U085476AH9U-826912a3ac01-512');
+    background-image: url('../../Adarsh.png');
     background-size: cover;
     background-position: center;
     height: 250px !important;
     width: 250px !important;
+}
+
+div.philip {
+    background-image: url('../../Philip.png');
+    background-size: cover;
+    background-position: center;
+    height: 250px !important;
+    width: 250px !important;
+}
+
+div.center {
+    display: flex;
+    gap: 2px;
+    align-items: center;
 }
 
 div.custom-flex {
@@ -54,16 +72,32 @@ div.custom-flex {
 
 .contact-card-button {
     fill: currentColor !important;
-    color: #13AE5C !important;
+    color: #0fdd6f !important;
 }
 
-.external-background{
-    background-color: var(--dark-theme-brown);
+.external-button {
+    background-color: #13AE5C; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 6px 15px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+    cursor: pointer; /* Change cursor on hover */
+    border-radius: 20px; /* Rounded corners */
+    width: auto; /* Make the button width fit its content */
+    display: inline-block; /* Keep the button inline */
+    margin-left: 0; /* Align to the left */
+    text-align: center; /* Center text inside button */
 }
 
-.external-button{
-    background-color: var(--orange-color) !important;
-    color: var(--dark-theme-brown) !important;
-    border: none;
+.external-button:hover {
+    background-color: #119A4D; /* Darker green on hover */
 }
 
+/* Custom container for the button */
+.button-container {
+    display: flex;
+    justify-content: flex-start; /* Align the button to the left */
+    align-items: center; /* Vertically center the button */
+    margin-top: 0px; /* Space above the button */
+    margin-bottom: 100px; /* Space below the button */
+}
