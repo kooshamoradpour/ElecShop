@@ -1,6 +1,7 @@
 import { Product, User } from "../models/index.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
 import { IUser } from "../models/User.js";
+import { IProduct } from "../models/Product.js";
 
 // Define types for the arguments
 interface Context {
@@ -12,6 +13,15 @@ interface AddUserArgs {
     email: string;
     password: string;
   };
+}
+interface AddProductToDB{
+  input: {
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    stock: number;
+  }
 }
 interface AddToCart {
   input: {
@@ -144,8 +154,9 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    addProduuctToDB: async (_parent:any, _args: any, _context:Context) => {
-      
+    addProductToDB: async (_parent:any, {input}: AddProductToDB, context:Context): Promise<IProduct|null> => {
+      if(context.user?.isAdmin) return await Product.create({...input})
+        throw AuthenticationError;
     }
   },
 };
