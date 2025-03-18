@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     cart: [CartItem!]!
+    isAdmin: Boolean
   }
   type Product {
     _id:ID!
@@ -25,6 +26,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    isAdmin:Boolean
   }
 
   input SaveProduct {
@@ -59,6 +61,7 @@ const typeDefs = gql`
     removeProductFromCart(productId: ID!): User
     addProductToDB(input: InsertProductToDB): Product
     updateQuantity(input: SaveProduct): User
+    // todo add more functionality for admin
   }
 `;
 

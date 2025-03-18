@@ -85,7 +85,7 @@ const resolvers = {
       const user = await User.create({ ...input }); // pass username,email,password
 
       // Sign a token with the user's information
-      const token = signToken(user.username, user.email, user._id);
+      const token = signToken(user.username, user.email, user._id, user.isAdmin);
 
       // Return the token and the user
       return { token, user };
@@ -109,7 +109,7 @@ const resolvers = {
       }
 
       // Sign a token with the user's information
-      const token = signToken(user.username, user.email, user._id);
+      const token = signToken(user.username, user.email, user._id, user.isAdmin);
 
       // Return the token and the user
       return { token, user };
@@ -146,15 +146,18 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError("User not authenticated.");
       }
-
-      const { productId } = input;
-
+      // console.log(input);
+      // need to check the quantity and stock
+      const { productId, quantity } = input; // todo make sure its never 0
+      // const prod = await Product.findById(productId);
+      // const prodstock = prod?.stock;
       const user = await User.findOneAndUpdate(
         { "cart.productId": productId },
-        { $inc: { "cart.$.quantity": 1 } },
+        { $set: { "cart.$.quantity": quantity } },
         { new: true }
       );
-
+      // console.log(user);
+      
       return user;
     },
 
@@ -176,13 +179,14 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // admin database funct
     addProductToDB: async (
       _parent: any,
       { input }: AddProductToDB,
       context: Context
     ): Promise<IProduct | null> => {
       if (context.user?.isAdmin) return await Product.create({ ...input });
-      throw AuthenticationError;
+      throw new AuthenticationError("Admin Privilages Required"); // new might cause trouble
     },
   },
 };
