@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 // import  { ICart } from './Cart';
 
 // Define an interface for the User document
-interface ICart extends Document {
+export interface ICart extends Document {
   productId:Schema.Types.ObjectId;
   quantity: number;
 }
@@ -40,7 +40,9 @@ const userSchema = new Schema<IUser>(
     cart:[
       {
         productId:{type: Schema.Types.ObjectId, ref: 'Product'},
+
         quantity:{type: Number, required:true, min:1},
+        
         _id: false
       }
     ] 
