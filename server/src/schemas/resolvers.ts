@@ -1,7 +1,7 @@
 import { Product, User } from "../models/index.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
 import { IUser } from "../models/User.js";
-
+import { IProduct } from "../models/Product.js";
 
 // Define types for the arguments
 interface Context {
@@ -12,6 +12,15 @@ interface AddUserArgs {
     username: string;
     email: string;
     password: string;
+  };
+}
+interface AddProductToDB {
+  input: {
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    stock: number;
   };
 }
 interface AddToCart {
@@ -28,9 +37,9 @@ interface LoginUserArgs {
 
 interface UpdateCartQuantity {
   input: {
-  productId: string;
-  quantity: number;
-}
+    productId: string;
+    quantity: number;
+  };
 }
 
 const resolvers = {
@@ -47,7 +56,6 @@ const resolvers = {
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
-
         return User.findOne({ _id: context.user._id }).populate(
           "cart.productId"
         );
@@ -77,12 +85,11 @@ const resolvers = {
       const user = await User.create({ ...input }); // pass username,email,password
 
       // Sign a token with the user's information
-      const token = signToken(user.username, user.email, user._id);
+      const token = signToken(user.username, user.email, user._id, user.isAdmin);
 
       // Return the token and the user
       return { token, user };
-
-  },
+    },
 
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
       // Find a user with the provided email
@@ -102,7 +109,7 @@ const resolvers = {
       }
 
       // Sign a token with the user's information
-      const token = signToken(user.username, user.email, user._id);
+      const token = signToken(user.username, user.email, user._id, user.isAdmin);
 
       // Return the token and the user
       return { token, user };
@@ -114,7 +121,6 @@ const resolvers = {
       context: Context // return the info of the logged in user and then we can save the product in cart for that user
     ): Promise<IUser | null> => {
       if (context.user) {
-        
         return await User.findOneAndUpdate(
           { _id: context.user._id },
           {
@@ -132,19 +138,28 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    updateQuantity: async (_parent: any, { input }: UpdateCartQuantity, context: Context) => {
+    updateQuantity: async (
+      _parent: any,
+      { input }: UpdateCartQuantity,
+      context: Context
+    ) => {
       if (!context.user) {
         throw new AuthenticationError("User not authenticated.");
       }
-
-      const { productId } = input;
-
-      const user = await User.findOneAndUpdate({"cart.productId":productId},{$inc:{"cart.$.quantity":1}},{new:true})
-
-      return user
-    }
-  }
-  };
+      // console.log(input);
+      // need to check the quantity and stock
+      const { productId, quantity } = input; // todo make sure its never 0
+      // const prod = await Product.findById(productId);
+      // const prodstock = prod?.stock;
+      const user = await User.findOneAndUpdate(
+        { "cart.productId": productId },
+        { $set: { "cart.$.quantity": quantity } },
+        { new: true }
+      );
+      // console.log(user);
+      
+      return user;
+    },
 
     removeProductFromCart: async (
       _parent: any,
@@ -159,16 +174,21 @@ const resolvers = {
             new: true,
             runValidators: true,
           }
-        ).populate('cart.productId');
+        ).populate("cart.productId");
       }
       throw AuthenticationError;
     },
 
-    addProduuctToDB: async (_parent:any, _args: any, _context:Context) => {
-      
-    }
+    // admin database funct
+    addProductToDB: async (
+      _parent: any,
+      { input }: AddProductToDB,
+      context: Context
+    ): Promise<IProduct | null> => {
+      if (context.user?.isAdmin) return await Product.create({ ...input });
+      throw new AuthenticationError("Admin Privilages Required"); // new might cause trouble
+    },
   },
 };
-
 
 export default resolvers;
