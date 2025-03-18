@@ -2,6 +2,7 @@ import { Product, User } from "../models/index.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
 import { IUser } from "../models/User.js";
 
+
 // Define types for the arguments
 interface Context {
   user?: IUser;
@@ -25,9 +26,12 @@ interface LoginUserArgs {
   password: string;
 }
 
-// interface UserArgs {
-//   username: string;
-// }
+interface UpdateCartQuantity {
+  input: {
+  productId: string;
+  quantity: number;
+}
+}
 
 const resolvers = {
   Query: {
@@ -43,6 +47,7 @@ const resolvers = {
     me: async (_parent: any, _args: any, context: any) => {
       // If the user is authenticated, find and return the user's information along with their thoughts
       if (context.user) {
+
         return User.findOne({ _id: context.user._id }).populate(
           "cart.productId"
         );
@@ -76,7 +81,8 @@ const resolvers = {
 
       // Return the token and the user
       return { token, user };
-    },
+
+  },
 
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
       // Find a user with the provided email
@@ -126,6 +132,20 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    updateQuantity: async (_parent: any, { input }: UpdateCartQuantity, context: Context) => {
+      if (!context.user) {
+        throw new AuthenticationError("User not authenticated.");
+      }
+
+      const { productId } = input;
+
+      const user = await User.findOneAndUpdate({"cart.productId":productId},{$inc:{"cart.$.quantity":1}},{new:true})
+
+      return user
+    }
+  }
+  };
+
     removeProductFromCart: async (
       _parent: any,
       { productId }: { productId: string },
@@ -149,5 +169,6 @@ const resolvers = {
     }
   },
 };
+
 
 export default resolvers;
