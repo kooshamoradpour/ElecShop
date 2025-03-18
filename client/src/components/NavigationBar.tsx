@@ -35,7 +35,7 @@ const searchButtonStyle = {
 };
 
 const cartIconStyle = {
-  color: "white",
+  color: "black",
   fontSize: "24px",
   marginLeft: "20px"
 };
@@ -71,7 +71,7 @@ const NavigationBar = () => {
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/Cart" style={{ color: "white" }}>Products</Link>
+              <Link to="/Home" style={{ color: "white" }}>Home</Link>
             </li>
             <li className="nav-header" style={navHeaderStyle}>
               <Link to="/contact" className="nav-link" style={{ color: "white" }}>Contact Us</Link>
@@ -160,7 +160,7 @@ const NavigationBar = () => {
                   Password:
                   <input type="password" />
                 </label>
-                <button type="submit">New customer?</button>
+                <button type="submit">Sign up</button>
               </form>
             )}
           </div>
