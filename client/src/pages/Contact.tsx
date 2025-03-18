@@ -137,7 +137,15 @@ const Contact = () => {
               name: "Adarsh Sidhu",
               github: "https://github.com/sidhuad",
               linkedin: "https://www.linkedin.com/in/adarsh-s-898380161/"
+            },  
+
+            {
+              name: "Philip Ecdel",
+              github: "https://github.com/sidhuad",
+              linkedin: "https://www.linkedin.com/in/philipecdao/"
             }
+              
+            
           ].map((developer, index) => (
             <div className="col-12 col-md-3 mb-4" key={index}>
               <div className="card contact-card movie-card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 
 const Sidebar: React.FC = () => {
-    const [selectedKeywords, setSelectedKeywords] = useState(["any"]);
+    const [selectedKeywords, setSelectedKeywords] = useState(["Laptop"]);
     const [keywordInput, setKeywordInput] = useState("");
     const [filters, setFilters] = useState({
         tvs: false,
