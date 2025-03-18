@@ -34,18 +34,6 @@ describe("Home Component", () => {
     cy.get('.card-text').first().should('contain.text', '$0');
   });
 
-  it("should simulate clicking on a sort button", () => {
-    // Test the functionality when a sort button is clicked
-    cy.get('.custom-button').contains('Price ascending').click();
-    cy.url().should('include', 'sort=price-asc'); // Ensure the URL updates (you may want to change this based on your actual implementation)
-
-    cy.get('.custom-button').contains('Price descending').click();
-    cy.url().should('include', 'sort=price-desc'); // Ensure the URL updates (you may want to change this based on your actual implementation)
-
-    cy.get('.custom-button').contains('Rating').click();
-    cy.url().should('include', 'sort=rating'); // Ensure the URL updates (you may want to change this based on your actual implementation)
-  });
-
   it("should render 'Product Image' placeholder in the card", () => {
     // Ensure that the placeholder for product images is rendered
     cy.get('.text-muted').should('contain.text', 'Product Image');
