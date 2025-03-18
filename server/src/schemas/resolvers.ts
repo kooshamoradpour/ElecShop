@@ -1,6 +1,6 @@
 import { Product, User } from "../models/index.js";
 import { signToken, AuthenticationError } from "../utils/auth.js";
-import { IUser,ICart } from "../models/User.js";
+import { IUser } from "../models/User.js";
 
 
 // Define types for the arguments
@@ -127,28 +127,11 @@ const resolvers = {
         throw new AuthenticationError("User not authenticated.");
       }
 
-      const { productId, quantity } = input;
+      const { productId } = input;
 
-      const user = await User.findById(context.user._id);
-      if (!user) {
-        throw new Error("User not found");
-      }
+      const user = await User.findOneAndUpdate({"cart.productId":productId},{$inc:{"cart.$.quantity":1}},{new:true})
 
-      const updateQuantityIndex = user.cart.findIndex(
-        (item: any) => item.productId.toString() === productId
-      );
-
-      if (updateQuantityIndex === -1) {
-        throw new Error("Product not found in cart");
-      }
-
-      user.cart[updateQuantityIndex].quantity += quantity;
-
-      await user.save();
-
-      // const token = signToken(user.username, user.email, user._id);
-
-      return {cart: user.cart };
+      return user
     }
   }
   };
