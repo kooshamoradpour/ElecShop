@@ -34,7 +34,7 @@ const Cart = () => {
 
           {/* Product Information Section */}
           <div className="col-md-9">
-            <div className="card-body">
+            <div className="card-body ml-1">
               {/* Product Name */}
               <h5 className="card-title mt-2">{product.name}</h5>
 
