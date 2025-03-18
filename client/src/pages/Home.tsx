@@ -1,6 +1,7 @@
-import { useState, ReactNode, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import '../styles/home.css';
+import { useLocation } from "react-router-dom";
 
 import Auth from "../utils/auth.js";
 import { useQuery } from "@apollo/client";
@@ -8,7 +9,6 @@ import { GET_ALL_PRODUCTS } from "../utils/queries";
 import { IProduct } from "../model/Product.js";
 
 const Home = () => {
-  // const [sortOption, setSortOption] = useState("new");
   const [allProduct, SetAllProduct] = useState<IProduct[]>([{
     id:"",
     name:"",
@@ -17,12 +17,6 @@ const Home = () => {
     price:0,
     stock:0
   }])
-  // Placeholder
-  const products = [
-    { id: 1, name: "Product name 1", price: 0, description: "Description" },
-    { id: 2, name: "Product name 2", price: 0, description: "Description" },
-    { id: 3, name: "Product name 3", price: 0, description: "Description" },
-  ];
 
   const {data,loading} = useQuery(GET_ALL_PRODUCTS);
  

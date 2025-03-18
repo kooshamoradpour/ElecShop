@@ -58,7 +58,7 @@ const NavigationBar = () => {
   const handleModalClose = () => {setFormType(null)}
 
   const handleSearchChange = (e:React.ChangeEvent<HTMLInputElement>) => {setSearchQuery(e.target.value)}
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = (e:any) => {
     e.preventDefault();
     if(searchQuery.trim()){
       navigate(`/home?search=${encodeURIComponent(searchQuery)}`)
