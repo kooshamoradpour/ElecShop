@@ -74,12 +74,12 @@ const Cart = () => {
       </div>
 
       {/* Total Price and Checkout Button - Side by Side */}
-      <div className="d-flex justify-content-end align-items-center mt-4">
+      <div className="d-flex justify-content-end align-items-center mt-4 button-container">
         {/* Total Price (Bold) */}
         <h3 className="mr-3 fw-bold">Total: ${calculateTotal()}</h3>
-
-        {/* Proceed to Checkout Button */}
-        <button className="btn btn-primary proceed-btn">Proceed to Checkout</button>
+ {/* Proceed to Checkout Button */}
+        <button className="external-button">Proceed to Checkout</button>
+       
       </div>
     </div>
   );

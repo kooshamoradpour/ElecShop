@@ -4,6 +4,7 @@ import App from './App.jsx';
 import Home from './pages/Home';
 import ErrorPage from './pages/Error';
 import Cart from './pages/Cart.js';
+import Contact from './pages/Contact.js';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />
+      },
+      {
+        path: '/contact',
+        element: <Contact />
       }
     ]
   },
