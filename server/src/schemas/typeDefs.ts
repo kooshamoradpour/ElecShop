@@ -61,7 +61,7 @@ const typeDefs = gql`
     removeProductFromCart(productId: ID!): User
     addProductToDB(input: InsertProductToDB): Product
     updateQuantity(input: SaveProduct): User
-    // todo add more functionality for admin
+    # todo add more functionality for admin
   }
 `;
 

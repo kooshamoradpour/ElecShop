@@ -24,6 +24,7 @@ export const ADD_USER = gql`
     }
   }
 `;
+
 export const SAVE_PRODUCT_TO_CART = gql`
   mutation saveProductToCart($input: SaveProduct!) {
     username
@@ -60,18 +61,6 @@ export const REMOVE_PRODUCT_FROM_CART = gql`
   }
 `;
 
-export const ADD_PRODUCT_TO_DB = gql`
-  mutation AddProductToDB($input: InsertProductToDB) {
-    addProductToDB(input: $input) {
-      name
-      description
-      image
-      price
-      stock
-    }
-  }
-`;
-
 export const UPDATE_QUANTITY = gql`
   mutation UpdateQuantity($input: SaveProduct) {
     updateQuantity(input: $input) {
@@ -84,3 +73,16 @@ export const UPDATE_QUANTITY = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT_TO_DB = gql`
+  mutation AddProductToDB($input: InsertProductToDB) {
+    addProductToDB(input: $input) {
+      name
+      description
+      image
+      price
+      stock
+    }
+  }
+`;
+

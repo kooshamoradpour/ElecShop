@@ -3,21 +3,23 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+
 import Auth from '../utils/auth';
+
 import type { User } from '../model/User';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({}: { handleModalClose: () => void }) => {
-  const [userFormData, setUserFormData] = useState<Omit<User, 'savedBooks'>>({
-    username: '',
+  const [userFormData, setUserFormData] = useState<User>({
     email: '',
     password: '',
   });
 
   const [showAlert, setShowAlert] = useState(false);
+  const [validated] = useState(false);
 
   // Apollo mutation hook for logging in
-  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -35,7 +37,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
     }
 
     try {
-      const { data } = await loginUser({
+      const { data } = await login({
         variables: { email: userFormData.email, password: userFormData.password },
       });
 
@@ -51,7 +53,6 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
     }
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
     });
@@ -59,7 +60,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
 
   return (
     <>
-      <Form noValidate validated={true} onSubmit={handleFormSubmit}>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert || !!error} variant='danger'>
           Something went wrong with your login credentials!
         </Alert>
