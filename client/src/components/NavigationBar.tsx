@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaBars, FaShoppingCart } from 'react-icons/fa';
 import { useState } from 'react';
 import logo from "../assets/ElecShop Logo.png";
 
-// Add CSS styles for nav-header and search bar
+import LoginForm from "./LoginForm.js";
+import SignupForm from "./SignupForm.js";
+
+import Auth from "../utils/auth.js"
+
 const navHeaderStyle = {
   margin: "0 10px",
   display: "flex",
@@ -36,17 +40,30 @@ const searchButtonStyle = {
 };
 
 const cartIconStyle = {
-  color: "white",
+  color: "black",
   fontSize: "24px",
   marginLeft: "20px"
 };
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [formType, setFormType] = useState<"login" | "signup" | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleModalClose = () => {setFormType(null)}
+
+  const handleSearchChange = (e:React.ChangeEvent<HTMLInputElement>) => {setSearchQuery(e.target.value)}
+  const handleSearchSubmit = (e:any) => {
+    e.preventDefault();
+    if(searchQuery.trim()){
+      navigate(`/home?search=${encodeURIComponent(searchQuery)}`)
+    }
+  }
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#13AE5C", padding: "10px 20px" }}>
@@ -62,8 +79,10 @@ const NavigationBar = () => {
             type="text"
             placeholder="Search for a product"
             style={searchInputStyle}
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
-          <button style={searchButtonStyle}>
+          <button style={searchButtonStyle} onClick={handleSearchSubmit}>
             <FaSearch style={{ color: "black" }} />
           </button>
         </div>
@@ -71,24 +90,45 @@ const NavigationBar = () => {
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/products" style={{ color: "white" }}>Products</Link>
+              <Link to="/Home" style={{ color: "white" }}>Home</Link>
             </li>
             <li className="nav-header" style={navHeaderStyle}>
               <Link to="/contact" className="nav-link" style={{ color: "white" }}>Contact Us</Link>
             </li>
-            <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/login" style={{ color: "white" }}>Sign in</Link>
-            </li>
-            <li className="nav-header" style={navHeaderStyle}>
-              <Link to="/signup" style={{ color: "white" }}>Register</Link>
-            </li>
-            <li className="nav-header d-none d-lg-block" style={navHeaderStyle}>
+
+            {/* Login and Signup Buttons */}
+            {Auth.loggedIn() ? (
+               <button className="login" onClick={Auth.logout} style={{ margin: "0 10px", padding: "8px 16px", borderRadius: "10px", border: "none", backgroundColor: "#000", color: "#fff" }}>
+               Log Out
+             </button>
+            ):(
+              <>
+              <button className="login" onClick={() => setFormType("login")} style={{ margin: "0 10px", padding: "8px 16px", borderRadius: "10px", border: "none", backgroundColor: "#000", color: "#fff" }}>
+              Sign in
+              </button>
+              <button className="signup" onClick={() => setFormType("signup")} style={{ padding: "8px 16px", borderRadius: "10px", border: "none", backgroundColor: "#fff", color: "#000" }}>
+              New customer?
+              </button>
+              </>
+            )}
+
+            {/*  cart icon conditionally rendered when user is logged in  */}
+            { Auth.loggedIn() ?
+            <li className="nav-header d-lg-block" style={navHeaderStyle}>
               <Link to="/cart" style={cartIconStyle}>
                 <FaShoppingCart />
               </Link>
             </li>
+            :
+            <li className="nav-header d-none" style={navHeaderStyle}>
+              <Link to="/cart" style={cartIconStyle}>
+                <FaShoppingCart />
+              </Link>
+            </li>
+            } 
           </ul>
         </div>
+
 
         {/* Mobile Search Bar with Icons */}
         <div className="d-lg-none w-100 mt-2">
@@ -117,8 +157,79 @@ const NavigationBar = () => {
               </button>
             </div>
           </div>
+
         </div>
       </div>
+
+      {/* Forms for Login and Signup */}
+      {formType && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button onClick={() => setFormType(null)} className="close-button">
+              ✖
+            </button>
+            {formType === 'login' ? (<LoginForm handleModalClose={handleModalClose}/>) : formType === 'signup'? (<SignupForm handleModalClose={handleModalClose} />) : null }            
+          </div>
+        </div>
+      )}
+      <style>
+  {`
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+    }
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+    .form label {
+      margin-bottom: 10px;
+    }
+    .form input {
+      padding: 8px;
+      margin-top: 5px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #13AE5C;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  `}
+</style>
+
+
     </nav>
   );
 }

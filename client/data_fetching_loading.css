@@ -1,0 +1,45 @@
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+.satsig{
+overflow: hidden;
+position: relative;
+}
+.satsig::after{
+    position: absolute;
+    content: '';
+    background-color: white; /* make sure the color matches the background*/
+    height: 50px;
+    width: 50px;
+    transform: translate(-50px,0px);
+    animation: slide 600ms ease-in-out 800ms 8 normal forwards;
+}
+.dishsig{
+    position: relative;
+    overflow: hidden;
+}
+.dishsig::after{
+    position: absolute;
+    content: '';
+    background-color: white; /* make sure the color matches the background*/
+    height: 50px;
+    width: 50px;
+    transform: translate(-50px,0px);
+    animation: slide 500ms ease-in-out 400ms 10 normal forwards;
+}
+img[style*="--index:2"]{
+    transform: rotateX(180deg);
+}
+
+img[style*="--index:1"]{
+    transform: rotateZ(315deg);
+}
+
+@keyframes slide{
+    0% {transform:translate(-50px,0px)}
+    100% {transform:translate(-50px,50px)}
+}

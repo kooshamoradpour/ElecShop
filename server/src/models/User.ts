@@ -4,17 +4,18 @@ import bcrypt from 'bcrypt';
 // import  { ICart } from './Cart';
 
 // Define an interface for the User document
-interface ICart extends Document {
+export interface ICart extends Document {
   productId:Schema.Types.ObjectId;
   quantity: number;
 }
 export interface IUser extends Document {
-  // id:string; ad isAdmin field here and in typedef before starting in frontend land
+  // id:string; add isAdmin field here and in typedef before starting in frontend land
   username: string;
   email: string;
   password: string;
   cart: ICart[];
   isCorrectPassword(password: string): Promise<boolean>;
+  isAdmin: boolean; // CHECKING if user is admin or not 
 }
 
 // Define the schema for the User document
@@ -40,9 +41,13 @@ const userSchema = new Schema<IUser>(
     cart:[
       {
         productId:{type: Schema.Types.ObjectId, ref: 'Product'},
-        quantity:{type: Number, required:true, min:1}
+
+        quantity:{type: Number, required:true, min:1},
+        
+        _id: false
       }
-    ] 
+    ],
+    isAdmin: {type: Boolean, default: false } 
   },
   {
     timestamps: true,

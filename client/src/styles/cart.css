@@ -1,0 +1,26 @@
+.external-button {
+  background-color: #13AE5C; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 6px 15px; /* Smaller padding */
+  font-size: 14px; /* Smaller font size */
+  cursor: pointer; /* Change cursor on hover */
+  /* border-radius: 5px; */ /* Remove rounded corners */
+  width: auto; /* Make the button width fit its content */
+  display: inline-block; /* Keep the button inline */
+  margin-left: 0; /* Align to the left */
+  text-align: center; /* Center text inside button */
+}
+
+.external-button:hover {
+  background-color: #119A4D; /* Darker green on hover */
+}
+
+/* Custom container for the button */
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Align the button to the left */
+  align-items: center; /* Vertically center the button */
+  margin-top: 0px; /* Space above the button */
+  margin-bottom: 100px; /* Space below the button */
+}

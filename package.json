@@ -17,7 +17,7 @@
     "render-start": "npm run server",
     "cypress": "npx cypress open",
     "test": "npx cypress run --browser electron --headless",
-    "crypress:component": "cypress run --component",
+    "test-component": "cypress run --component",
     "set-up": "npm install && npm run build && npm run seed && npm run start:dev"
   },
   "keywords": [],
@@ -34,10 +34,12 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
     "typescript": "^5.5.3",
-    "vitest": "^2.0.3",
+    "vitest": "^2.1.9",
     "wait-on": "^7.2.0"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "react-bootstrap": "^2.10.9",
+    "react-icons": "^5.5.0"
   }
 }

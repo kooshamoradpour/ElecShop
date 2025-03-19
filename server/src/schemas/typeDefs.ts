@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     cart: [CartItem!]!
+    isAdmin: Boolean
   }
   type Product {
     _id:ID!
@@ -25,11 +26,19 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    isAdmin:Boolean
   }
 
   input SaveProduct {
     productId: ID!      # product id to be stored in user cart
     quantity: Int!
+  }
+  input InsertProductToDB{ # input for when admin add products adds to database
+    name: String!
+    description: String!
+    image: String!
+    price: Float!
+    stock: Int!
   }
 
   type Auth {
@@ -50,7 +59,9 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     saveProductToCart(input: SaveProduct!): User # return the user with updated cart also saveProduct can take quantity from the display card client side
     removeProductFromCart(productId: ID!): User
-    addProductToDB(input: SaveProduct): Product
+    addProductToDB(input: InsertProductToDB): Product
+    updateQuantity(input: SaveProduct): User
+    # todo add more functionality for admin
   }
 `;
 

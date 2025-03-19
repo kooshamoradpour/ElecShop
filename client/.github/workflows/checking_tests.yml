@@ -1,0 +1,42 @@
+# Name of workflow
+name: Test workflow when a pull Request is made to the develop branch.
+
+# Trigger workflow on all pull requests
+on:
+  pull_request:
+    branches:
+      - develop
+
+# Jobs to carry out
+jobs:
+  test:
+    # Operating system to run job on
+    runs-on: ubuntu-latest
+
+    # Steps in job
+    steps:
+      # Get code from repo
+      - name: Checkout code
+        uses: actions/checkout@v2  # Update to v2 for more stability and performance
+
+      # Set up Node.js
+      - name: Use Node.js 21.x
+        uses: actions/setup-node@v2  # Update to v2 for more stability and performance
+        with:
+          node-version: 21.x
+
+      # Install dependencies
+      - name: 🧰 Install Deps
+        run: npm install
+
+      # Run build
+      - name: Run Build
+        run: npm run build
+        
+      # Install Cypress Binary
+      - name: Install Cypress Binary
+        run: npx cypress install
+      
+      # Run tests
+      - name: Run Tests
+        run: npm run test-component
