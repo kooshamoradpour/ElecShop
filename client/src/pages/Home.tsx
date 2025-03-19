@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar.js";
 import "../styles/home.css";
 import { useLocation } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   QUERY_ME,
-} from "../utils/queries";
+} from "../utils/queries.js";
 import { IProduct } from "../model/Product.js";
 import { SAVE_PRODUCT_TO_CART } from "../utils/mutations.js";
 
