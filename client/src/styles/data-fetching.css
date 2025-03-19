@@ -16,7 +16,7 @@ position: relative;
     height: 50px;
     width: 50px;
     transform: translate(-50px,0px);
-    animation: slide 100ms ease-in-out 10ms 8 normal forwards;
+    animation: slide 100ms ease-in-out 10ms infinite normal forwards;
 }
 .dishsig{
     position: relative;
@@ -29,7 +29,7 @@ position: relative;
     height: 50px;
     width: 50px;
     transform: translate(-50px,0px);
-    animation: slide 100ms ease-in-out 0ms 10 normal forwards;
+    animation: slide 100ms ease-in-out 0ms infinite normal forwards;
 }
 img[alt="satwireless"]{
     transform: rotateX(180deg);
