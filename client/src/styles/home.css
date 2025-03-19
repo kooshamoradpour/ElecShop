@@ -23,3 +23,11 @@
   background-color: #1a1a1a;
   color: white;
 } 
+.navbar{
+  position: sticky;
+  top: 0px;
+  z-index: 999;
+}
+.custom{
+  margin-bottom: 20px;
+}
