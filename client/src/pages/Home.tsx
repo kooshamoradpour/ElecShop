@@ -13,6 +13,8 @@ import {
 import { IProduct } from "../model/Product.js";
 import { SAVE_PRODUCT_TO_CART } from "../utils/mutations.js";
 
+import LoadingScreen from "../components/LoadingComponent.js";
+
 const Home = () => {
   const [allProduct, setAllProduct] = useState<IProduct[]>([
     {
@@ -31,12 +33,6 @@ const Home = () => {
 
   //MUTATIONS
   const [saveProductToCart] = useMutation(SAVE_PRODUCT_TO_CART);
-
-  useEffect(() => {
-    if (loading) {
-      console.log("loading .....");
-    }
-  }, [loading]);
 
   useEffect(() => {
     if (data && data.getAllProducts) {
@@ -64,7 +60,7 @@ const Home = () => {
     console.log(productNameFromQuery);
   }, [productData]);
 
-  const { data: singleProduct, loading: singleProductLoading } = useQuery(
+  const { data: singleProduct } = useQuery(
     GET_PRODUCT_BY_NAME,
     {
       variables: { name: productNameFromQuery },
@@ -93,25 +89,33 @@ const Home = () => {
     }
     try {
       // console.log(prodToSave);
-      
+
       await saveProductToCart({
         variables: {
           input: { ...prodToSave },
-        
+
           refetchQueries: [
             {
               query: QUERY_ME,
               context: {
                 headers: {
-                  Authorization: `Bearer ${Auth.loggedIn() ? Auth.getToken() : ""}`
+                  Authorization: `Bearer ${
+                    Auth.loggedIn() ? Auth.getToken() : ""
+                  }`,
                 },
               },
             },
           ],
         },
       });
-    } catch (error) {console.error(error)}
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="container-fluid mt-3">
@@ -203,7 +207,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="row row-cols-1 row-cols-md-3 g-4">
+              <div className=" custom row row-cols-1 row-cols-md-3 g-4">
                 {/* slice(1) is gonna start from second index leaving 0 index to be styled differently*/}
                 {allProduct.slice(1).map((product) => (
                   <div className="col" key={product._id}>
