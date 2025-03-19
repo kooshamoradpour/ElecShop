@@ -31,9 +31,12 @@ const Cart = () => {
         Authorization: `Bearer ${Auth.loggedIn() ? Auth.getToken() : ""}`,
       },
     },
+    fetchPolicy: "network-only"
   });
 
   useEffect(() => {
+    // console.log(data);
+    
     if (data && data.me) {
       setUserData(data.me);
     }
