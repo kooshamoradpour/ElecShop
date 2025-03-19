@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaBars, FaShoppingCart } from 'react-icons/fa';
 import { useState } from 'react';
 import logo from "../assets/ElecShop Logo.png";
@@ -48,12 +48,22 @@ const cartIconStyle = {
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState<"login" | "signup" | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const handleModalClose = () => {setFormType(null)}
+
+  const handleSearchChange = (e:React.ChangeEvent<HTMLInputElement>) => {setSearchQuery(e.target.value)}
+  const handleSearchSubmit = (e:any) => {
+    e.preventDefault();
+    if(searchQuery.trim()){
+      navigate(`/home?search=${encodeURIComponent(searchQuery)}`)
+    }
+  }
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#13AE5C", padding: "10px 20px" }}>
@@ -69,8 +79,10 @@ const NavigationBar = () => {
             type="text"
             placeholder="Search for a product"
             style={searchInputStyle}
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
-          <button style={searchButtonStyle}>
+          <button style={searchButtonStyle} onClick={handleSearchSubmit}>
             <FaSearch style={{ color: "black" }} />
           </button>
         </div>
@@ -100,11 +112,20 @@ const NavigationBar = () => {
               </>
             )}
 
-            <li className="nav-header d-none d-lg-block" style={navHeaderStyle}>
+            {/*  cart icon conditionally rendered when user is logged in  */}
+            { Auth.loggedIn() ?
+            <li className="nav-header d-lg-block" style={navHeaderStyle}>
               <Link to="/cart" style={cartIconStyle}>
                 <FaShoppingCart />
               </Link>
             </li>
+            :
+            <li className="nav-header d-none" style={navHeaderStyle}>
+              <Link to="/cart" style={cartIconStyle}>
+                <FaShoppingCart />
+              </Link>
+            </li>
+            } 
           </ul>
         </div>
 

@@ -1,4 +1,9 @@
+import { IProduct } from "./Product"
+
 export interface User {
-    email: string | null;
-    password: string | null;
+    cart:ICart[]
+}
+interface ICart{
+    productId:IProduct,
+    quantity:number
 }
