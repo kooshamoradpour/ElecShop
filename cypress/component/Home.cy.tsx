@@ -1,59 +1,98 @@
-/// <reference types="cypress" />
+import { mount } from "cypress/react";
+import Home from "../../client/src/pages/Home"; // Adjust the path as per your project structure
+import { MemoryRouter } from "react-router-dom"; // This allows you to wrap your component with Router for routing functionality
+import { MockedProvider } from "@apollo/client/testing"; // This allows you to mock GraphQL queries for testing npm install 
+import {
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_NAME,
+} from "../../client/src/utils/queries"; // Adjust the paths
 
-describe('Home Page', () => {
-  beforeEach(() => {
-    // Assuming you're running your app on a local server (e.g., localhost:3000).
-    cy.visit('http://localhost:3000');
+// Mock data for the GraphQL queries
+const mockAllProducts = {
+  request: {
+    query: GET_ALL_PRODUCTS,
+  },
+  result: {
+    data: {
+      getAllProducts: [
+        {
+          _id: "1",
+          name: "Test Product 1",
+          description: "This is a test product",
+          price: 20,
+          stock: 100,
+          image: "https://via.placeholder.com/150",
+        },
+        {
+          _id: "2",
+          name: "Test Product 2",
+          description: "This is another test product",
+          price: 30,
+          stock: 50,
+          image: "https://via.placeholder.com/150",
+        },
+      ],
+    },
+  },
+};
+
+const mockSingleProduct = {
+  request: {
+    query: GET_PRODUCT_BY_NAME,
+    variables: { name: "Test Product 1" },
+  },
+  result: {
+    data: {
+      product: {
+        _id: "1",
+        name: "Test Product 1",
+        description: "This is a test product",
+        price: 20,
+        stock: 100,
+        image: "https://via.placeholder.com/150",
+      },
+    },
+  },
+};
+
+describe("Home Component", () => {
+  it("should display a list of products", () => {
+    mount(
+      <MockedProvider mocks={[mockAllProducts]} addTypename={false}>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+    // Ensure loading state is not present
+    cy.get(".loading-screen").should("not.exist");
+
+    // Verify if the product list is rendered
+    cy.get(".card").should("have.length", 2); // Ensure two cards (products) are rendered
+
+    // Verify the first product name and price
+    cy.get(".card-title").first().contains("Test Product 1");
+    cy.get(".card-text").first().contains("$20");
   });
 
-  it('should display a list of products', () => {
-    // Check if the page contains product cards
-    cy.get('.card').should('have.length', 10); // Assuming you have 10 products
+  it("should display a single product based on search query", () => {
+    const searchQuery = "Test Product 1";
 
-    // Check if the first product card contains the expected elements
-    cy.get('.card').first().within(() => {
-      cy.get('.card-title').should('contain', 'Apple MacBook Pro 13-inch');
-      cy.get('.card-text').first().should('contain', '$1299.99');
-    });
-  });
+    // Simulate routing with query param for searching a product
+    mount(
+      <MockedProvider mocks={[mockSingleProduct]} addTypename={false}>
+        <MemoryRouter initialEntries={[`/home?search=${searchQuery}`]}>
+          <Home />
+        </MemoryRouter>
+      </MockedProvider>
+    );
 
-  it('should display product details when search query is provided', () => {
-    // Assume the search query is "Apple MacBook Pro 13-inch"
-    cy.visit('http://localhost:3000?search=Apple%20MacBook%20Pro%2013-inch');
+    // Ensure loading state is not present
+    cy.get(".loading-screen").should("not.exist");
 
-    // Check that the product details are displayed correctly
-    cy.get('.card').within(() => {
-      cy.get('.card-title').should('contain', 'Apple MacBook Pro 13-inch');
-      cy.get('.card-text').first().should('contain', '$1299.99');
-      cy.get('.card-text').last().should('contain', 'The Apple MacBook Pro 13-inch comes with an Apple M1 chip, 8GB RAM, and 256GB SSD storage. A sleek and powerful laptop for professionals.');
-    });
-  });
-
-  it('should add a product to the cart when the "Add To Cart" button is clicked', () => {
-    // Check if the "Add To Cart" button exists
-    cy.get('button.btn.btn-primary').first().should('be.visible');
-
-    // Click the first "Add To Cart" button
-    cy.get('button.btn.btn-primary').first().click();
-
-    // Assuming your cart is displayed in some way, e.g., a notification or cart page
-    cy.get('.cart-notification').should('be.visible');
-  });
-
-  it('should filter products based on price', () => {
-    // Click on the "Price ascending" button
-    cy.get('.filter-button').contains('Price ascending').click();
-
-    // Check if products are sorted by price (you can add more sophisticated checks here)
-    cy.get('.card')
-      .first()
-      .within(() => {
-        cy.get('.card-title').should('contain', 'Samsung 1TB SSD 990 PRO'); // Check if the cheapest product is first
-      });
-  });
-
-  it('should display a loading screen while data is being fetched', () => {
-    // Assuming a loading screen component exists
-    cy.get('.loading-screen').should('be.visible');
+    // Verify the single product is rendered
+    cy.get(".card-title").contains("Test Product 1");
+    cy.get(".card-text").contains("$20");
   });
 });

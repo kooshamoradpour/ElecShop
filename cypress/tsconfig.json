@@ -8,7 +8,8 @@
     "noEmit": true,
     "composite": true,
     "jsx": "react-jsx",
-    "strict": true
+    "strict": true,
+    "baseUrl": "http://localhost:3000",
   },
   "include": ["**/*.tsx", "**/*.ts", "**/*.js", "**/*.jsx", "../client/src/pages/Home.tsx"]
 }

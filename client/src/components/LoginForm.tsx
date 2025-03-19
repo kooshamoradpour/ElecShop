@@ -6,11 +6,16 @@ import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
-import type { User } from '../model/User';
+// import type { User } from '../model/User';
+
+interface IUser{
+  email:string;
+  password:string;
+}
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({}: { handleModalClose: () => void }) => {
-  const [userFormData, setUserFormData] = useState<User>({
+  const [userFormData, setUserFormData] = useState<IUser>({
     email: '',
     password: '',
   });
@@ -59,7 +64,6 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   };
 
   return (
-    <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert || !!error} variant='danger'>
           Something went wrong with your login credentials!
@@ -97,7 +101,6 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
           Submit
         </Button>
       </Form>
-    </>
   );
 };
 
