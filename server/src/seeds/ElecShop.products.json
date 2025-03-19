@@ -1,0 +1,111 @@
+[{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e964c"
+  },
+  "name": "Apple MacBook Pro 13-inch",
+  "description": "The Apple MacBook Pro 13-inch comes with an Apple M1 chip, 8GB RAM, and 256GB SSD storage. A sleek and powerful laptop for professionals.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/172/17230/17230234.jpeg",
+  "price": 1299.99,
+  "stock": 30
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e964d"
+  },
+  "name": "Samsung Galaxy S21",
+  "description": "The Samsung Galaxy S21 features a 6.2-inch display, 8GB of RAM, and 128GB of storage. Powered by the Exynos 2100 processor.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/154/15453/15453494.jpeg",
+  "price": 799.99,
+  "stock": 50
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e964e"
+  },
+  "name": "Sony WH-1000XM4",
+  "description": "The Sony WH-1000XM4 are over-ear wireless noise-canceling headphones with up to 30 hours of battery life and excellent sound quality.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/147/14777/14777258.jpg",
+  "price": 349.99,
+  "stock": 20
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e964f"
+  },
+  "name": "Apple iPhone 13 Pro",
+  "description": "The Apple iPhone 13 Pro features a 6.1-inch display, A15 Bionic chip, 128GB storage, and ProMotion for smooth scrolling and responsiveness.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/162/16235/16235977.jpeg",
+  "price": 999.99,
+  "stock": 40
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e9650"
+  },
+  "name": "Dell XPS 13",
+  "description": "The Dell XPS 13 is a compact laptop featuring Intel's 11th generation Core i7 processor, 16GB of RAM, and a stunning 13-inch InfinityEdge display.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/179/17935/17935300.jpg",
+  "price": 1499.99,
+  "stock": 15
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e9651"
+  },
+  "name": "Bose QuietComfort 35 II",
+  "description": "The Bose QuietComfort 35 II headphones offer exceptional sound quality and industry-leading noise cancellation for an immersive listening experience.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/172/17212/17212850.jpg",
+  "price": 299.99,
+  "stock": 25
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e9652"
+  },
+  "name": "Microsoft Surface Pro 7",
+  "description": "The Microsoft Surface Pro 7 is a 2-in-1 laptop with a 12.3-inch PixelSense display, Intel Core i5 processor, and 8GB RAM. Perfect for work and play.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/188/18892/18892184.jpeg",
+  "price": 749.99,
+  "stock": 60
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e9653"
+  },
+  "name": "LG 27UK850-W 27-Inch 4K UHD Monitor",
+  "description": "The LG 27UK850-W 27-inch monitor features 4K UHD resolution, USB-C connectivity, and an IPS display for vivid colors and sharp details.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/155/15546/15546261.jpeg",
+  "price": 499.99,
+  "stock": 10
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e9654"
+  },
+  "name": "Samsung 1TB SSD 990 PRO",
+  "description": "The Samsung 990 PRO 1TB SSD offers high-speed performance with NVMe technology, perfect for fast boot-up times and large file transfers.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/166/16624/16624802.jpg",
+  "price": 149.99,
+  "stock": 100
+},
+{
+  "_id": {
+    "$oid": "67d782d6c15a907e2e7e9655"
+  },
+  "name": "GoPro HERO10 Black",
+  "description": "The GoPro HERO10 Black is a waterproof action camera that shoots 5.3K video at 60fps and 23MP photos with HyperSmooth stabilization.",
+  "image": "https://multimedia.bbycastatic.ca/multimedia/products/250x250/181/18196/18196611.jpg",
+  "price": 399.99,
+  "stock": 35
+},
+{
+  "_id": {
+    "$oid": "67d993c830f170fc1dfe2bdd"
+  },
+  "name": "xyz",
+  "description": "xyz",
+  "image": "https://i.imgur.com/EJLFNOwg.jpg",
+  "price": 10.99,
+  "stock": 11,
+  "__v": 0
+}]
