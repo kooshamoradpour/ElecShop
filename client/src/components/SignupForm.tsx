@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import { ADD_USER, LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
@@ -13,7 +13,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   // Apollo mutation hook for adding a user
-  const [addUser, { error }] = useMutation(LOGIN_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -32,7 +32,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
     try {
       const { data } = await addUser({
-        variables: { ...userFormData },
+        variables: {input:{...userFormData }},
       });
 
       if (!data) {
