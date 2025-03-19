@@ -26,8 +26,8 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_PRODUCT_TO_CART = gql`
-  mutation saveProductToCart($input: SaveProduct!) {
-    username
+  mutation SaveProductToCart($input: SaveProduct!) {
+  saveProductToCart(input: $input) {
     cart {
       productId {
         _id
@@ -40,6 +40,7 @@ export const SAVE_PRODUCT_TO_CART = gql`
       quantity
     }
   }
+}
 `;
 
 export const REMOVE_PRODUCT_FROM_CART = gql`
